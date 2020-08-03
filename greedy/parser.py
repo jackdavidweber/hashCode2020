@@ -15,12 +15,13 @@ def in_file_to_ds(file_name):
 
   # build latency ds
   for endpoint_id in range(0,num_endpoints):
+    latency_ds[endpoint_id] = {}
     num_caches = int(f.readline().split()[1])
     for i in range(0, num_caches):
       latency_list = f.readline().split()
-      latency_id = (endpoint_id, int(latency_list[0])) # (endpoint_id, cache_id)
+      cache_id = int(latency_list[0]) # cache_id
       latency_val = int(latency_list[1])
-      latency_ds[latency_id] = latency_val
+      latency_ds[endpoint_id][cache_id] = latency_val
   
   # build request ds
   for i in range(0, num_request_descs):

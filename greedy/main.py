@@ -23,7 +23,9 @@ def output_helper(lol, filename):
     file.write(str(non_empty_list_counter(lol)) + "\n")
     
     for i in range(0, len(lol)):
-        file.write(str(i) + video_str_helper(lol[i]) + "\n")
+        video_list = lol[i]
+        if len(video_list) > 0:
+            file.write(str(i) + video_str_helper(video_list) + "\n")
 
     file.close()
 
@@ -31,8 +33,8 @@ def output_helper(lol, filename):
 
 def main():
     file_names = ["example", "learning_cooking_from_youtube", "me_working_from_home", "music_videos_of_2020", "vloggers_of_the_world"]
+    file_names = ["example"]
     for file in file_names:
-        print(file)
         in_file = "in_files/" + file + ".in"
         out_file = "out_files/" + file + ".txt"
 
