@@ -9,6 +9,7 @@ def in_file_to_ds(file_name):
   video_ds = {}
   latency_ds = {}
   request_ds = {}
+  endpoint_from_datacenter = {}
 
   # build video ds
   video_ds = video_ds_builder(f.readline())
@@ -16,7 +17,9 @@ def in_file_to_ds(file_name):
   # build latency ds
   for endpoint_id in range(0,num_endpoints):
     latency_ds[endpoint_id] = {}
-    num_caches = int(f.readline().split()[1])
+    endpoint_info = f.readline().split()
+    num_caches = int(endpoint_info[1])
+    endpoint_from_datacenter[endpoint_id] = int(endpoint_info[0]) 
     for i in range(0, num_caches):
       latency_list = f.readline().split()
       cache_id = int(latency_list[0]) # cache_id
@@ -37,7 +40,8 @@ def in_file_to_ds(file_name):
       "latency_ds": latency_ds,
       "request_ds": request_ds,
       "num_cache_servers": num_cache_servers,
-      "capacity_cache_servers": capacity_cache_servers
+      "capacity_cache_servers": capacity_cache_servers,
+      "endpoint_from_datacenter": endpoint_from_datacenter
   }
 
 

@@ -1,8 +1,9 @@
 from setup import *
 
 def greedy_approach(ds):
-  req_list = request_list_builder(ds["request_ds"])
+  endpoint_from_datacenter = ds['endpoint_from_datacenter']
   lat_ds = ds["latency_ds"]
+  req_list = request_list_builder(ds["request_ds"], lat_ds, endpoint_from_datacenter)
   cache_capacity_list = cache_capacity_list_builder(ds["capacity_cache_servers"], ds["num_cache_servers"])
   cache_contents = [ set() for _ in range(ds["num_cache_servers"])]
   
